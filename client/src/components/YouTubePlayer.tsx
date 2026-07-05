@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { usePlayerStore } from "../stores/playerStore";
 import { useBackgroundMode } from "../hooks/useBackgroundMode";
+import { usePlaybackWakeLock } from "../hooks/usePlaybackWakeLock";
 
 declare global {
   interface Window {
@@ -27,6 +28,7 @@ function loadYouTubeApi() {
 
 export default function YouTubePlayer() {
   useBackgroundMode();
+  usePlaybackWakeLock();
   const containerId = useRef(`youtube-player-${crypto.randomUUID()}`);
   const playerRef = useRef<any>(null);
   const isPlayingRef = useRef(false);
