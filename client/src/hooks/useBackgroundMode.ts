@@ -31,6 +31,11 @@ export function useBackgroundMode() {
           await BackgroundMode.requestNotificationsPermission?.().catch(() => undefined);
         }
 
+        const microphonePermission = await BackgroundMode.checkMicrophonePermission?.().catch(() => undefined);
+        if (microphonePermission?.microphone !== "granted") {
+          await BackgroundMode.requestMicrophonePermission?.().catch(() => undefined);
+        }
+
         const batteryOptimization = await BackgroundMode.checkBatteryOptimizations?.().catch(() => undefined);
         if (batteryOptimization?.enabled) {
           await BackgroundMode.requestDisableBatteryOptimizations?.().catch(() => undefined);
